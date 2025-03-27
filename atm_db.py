@@ -17,6 +17,7 @@ class Bank:
     def create_table(self,table_name,mycursor):
         string = ""
         if table_name == "bank_name":
+            # you have given size is invalid. according to requirements you will give field size like varchar(50) name field lenght size 50 charcter max. same as you need to check all field. 
             string = "CREATE TABLE " + table_name +  " (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))"
         elif table_name == "account_detail":
             string = "CREATE TABLE " + table_name +  " (id INT AUTO_INCREMENT PRIMARY KEY, account_no int not null UNIQUE, ifsc_code VARCHAR(10), balance int, bank_id int, user_id int, FOREIGN KEY (bank_id) REFERENCES bank_name(id), FOREIGN KEY (user_id) REFERENCES user_detail(id))"
@@ -37,7 +38,8 @@ list_db = mycursor.fetchall()
 db_name = input("Enter Database name : ")
 # create database if database not exist
 if (db_name,) not in list_db:
-    check_db = input("database not exist do you want create new database Y or N : ")
+    ## db_name (like ATM_DB) database not exist. do you want to create new database Y or N: 
+    check_db = input("database not exist do you want create new database Y or N : ")  
     if check_db == 'Y' or check_db == 'y':
         bank_operation.create_db(db_name,mycursor)
 mycursor.execute("SHOW DATABASES")
